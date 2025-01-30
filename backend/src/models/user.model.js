@@ -18,11 +18,19 @@ const userSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "",
+      default: "false",
+    },
+    username: {
+      type: String,
+      required: true, // Ensure the username is required
+      unique: true,   // Ensure it's unique
     },
   },
   { timestamps: true }
 );
+
+// Ensure username is unique in the database
+userSchema.index({ username: 1 }, { unique: true });
 
 const User = mongoose.model("User", userSchema);
 
